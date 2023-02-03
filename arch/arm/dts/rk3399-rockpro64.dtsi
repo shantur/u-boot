@@ -20,6 +20,26 @@
 		stdout-path = "serial2:1500000n8";
 	};
 
+	smbios {
+		compatible = "u-boot,sysinfo-smbios";
+		smbios {
+			system {
+				manufacturer = "PINE64";
+				product = "RockPro64";
+			};
+
+			baseboard {
+				manufacturer = "PINE64";
+				product = "RockPro64";
+			};
+
+			chassis {
+				manufacturer = "PINE64";
+				product = "RockPro64";
+			};
+		};
+	};
+
 	clkin_gmac: external-gmac-clock {
 		compatible = "fixed-clock";
 		clock-frequency = <125000000>;
