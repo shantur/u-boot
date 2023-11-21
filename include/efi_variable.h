@@ -191,6 +191,27 @@ efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe);
 efi_status_t efi_var_from_file(void);
 
 /**
+ * efi_var_from_sf() - read variables from SPI Flash
+ *
+ * EFI variable buffer is read from SPI Flash at offset defined with
+ * CONFIG_EFI_VARIABLE_SF_OFFSET of length CONFIG_EFI_VAR_BUF_SIZE
+ *
+ *
+ * Return:	status code
+ */
+efi_status_t efi_var_from_sf(void);
+
+/**
+ * efi_var_to_sf() - save non-volatile variables to SPI Flash
+ *
+ * EFI variable buffer is saved to SPI Flash at offset defined with
+ * CONFIG_EFI_VARIABLE_SF_OFFSET of length CONFIG_EFI_VAR_BUF_SIZE.
+ *
+ * Return:	status code
+ */
+efi_status_t efi_var_to_sf(void);
+
+/**
  * efi_var_mem_init() - set-up variable list
  *
  * Return:	status code
