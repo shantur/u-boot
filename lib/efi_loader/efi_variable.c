@@ -357,8 +357,11 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
 	 * Write non-volatile EFI variables to file
 	 * TODO: check if a value change has occured to avoid superfluous writes
 	 */
-	if (attributes & EFI_VARIABLE_NON_VOLATILE)
+#if CONFIG_IS_ENABLED(EFI_VARIABLE_FILE_STORE)
+	if (attributes & EFI_VARIABLE_NON_VOLATILE) {
 		efi_var_to_file();
+	}
+#endif
 
 	return EFI_SUCCESS;
 }
@@ -466,9 +469,12 @@ efi_status_t efi_init_variables(void)
 	if (ret != EFI_SUCCESS)
 		return ret;
 
+#if CONFIG_IS_ENABLED(EFI_VARIABLE_FILE_STORE)
 	ret = efi_var_from_file();
 	if (ret != EFI_SUCCESS)
 		return ret;
+#endif
+
 	if (IS_ENABLED(CONFIG_EFI_VARIABLES_PRESEED)) {
 		ret = efi_var_restore((struct efi_var_file *)
 				      __efi_var_file_begin, true);
