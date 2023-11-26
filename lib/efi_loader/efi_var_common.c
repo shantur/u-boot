@@ -19,16 +19,16 @@ enum efi_secure_mode {
 	EFI_MODE_DEPLOYED,
 };
 
-struct efi_auth_var_name_type {
+__efi_runtime_data struct efi_auth_var_name_type {
 	const u16 *name;
 	const efi_guid_t *guid;
 	const enum efi_auth_var_type type;
 };
 
-const efi_guid_t efi_guid_image_security_database =
+const efi_guid_t __efi_runtime_data efi_guid_image_security_database =
 		EFI_IMAGE_SECURITY_DATABASE_GUID;
 
-static const struct efi_auth_var_name_type name_type[] = {
+static const __efi_runtime_data struct efi_auth_var_name_type name_type[] = {
 	{u"PK", &efi_global_variable_guid, EFI_AUTH_VAR_PK},
 	{u"KEK", &efi_global_variable_guid, EFI_AUTH_VAR_KEK},
 	{u"db",  &efi_guid_image_security_database, EFI_AUTH_VAR_DB},
@@ -368,14 +368,14 @@ bool efi_secure_boot_enabled(void)
 	return efi_secure_boot;
 }
 
-enum efi_auth_var_type efi_auth_var_get_type(const u16 *name,
+enum efi_auth_var_type __efi_runtime efi_auth_var_get_type(const u16 *name,
 					     const efi_guid_t *guid)
 {
-	for (size_t i = 0; i < ARRAY_SIZE(name_type); ++i) {
-		if (!u16_strcmp(name, name_type[i].name) &&
-		    !guidcmp(guid, name_type[i].guid))
-			return name_type[i].type;
-	}
+	// for (size_t i = 0; i < ARRAY_SIZE(name_type); ++i) {
+	// 	if (!u16_strcmp(name, name_type[i].name) &&
+	// 	    !guidcmp(guid, name_type[i].guid))
+	// 		return name_type[i].type;
+	// }
 	return EFI_AUTH_VAR_NONE;
 }
 

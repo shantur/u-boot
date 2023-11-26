@@ -10,7 +10,7 @@
 
 #define EFI_VARIABLE_READ_ONLY BIT(31)
 
-enum efi_auth_var_type {
+__efi_runtime_rodata enum efi_auth_var_type {
 	EFI_AUTH_VAR_NONE = 0,
 	EFI_AUTH_MODE,
 	EFI_AUTH_VAR_PK,

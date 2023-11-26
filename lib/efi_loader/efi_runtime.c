@@ -123,6 +123,7 @@ efi_status_t efi_init_runtime_supported(void)
 	rt_table->length = sizeof(struct efi_rt_properties_table);
 	rt_table->runtime_services_supported =
 				EFI_RT_SUPPORTED_GET_VARIABLE |
+				EFI_RT_SUPPORTED_SET_VARIABLE |
 				EFI_RT_SUPPORTED_GET_NEXT_VARIABLE_NAME |
 				EFI_RT_SUPPORTED_SET_VIRTUAL_ADDRESS_MAP |
 				EFI_RT_SUPPORTED_CONVERT_POINTER;
@@ -550,14 +551,14 @@ static __efi_runtime efi_status_t EFIAPI efi_set_virtual_address_map_runtime(
 			uint32_t descriptor_version,
 			struct efi_mem_desc *virtmap)
 {
-	return EFI_UNSUPPORTED;
+	return EFI_SUCCESS;
 }
 
 /**
  * efi_convert_pointer_runtime() - convert from physical to virtual pointer
  *
  * This function implements the ConvertPointer() runtime service after
- * the first call to SetVirtualAddressMap().
+ * the first call to efi_set_virtual_address_map_runtime().
  *
  * See the Unified Extensible Firmware Interface (UEFI) specification for
  * details.

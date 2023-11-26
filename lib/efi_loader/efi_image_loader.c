@@ -20,7 +20,7 @@
 #include <crypto/pkcs7_parser.h>
 #include <linux/err.h>
 
-const efi_guid_t efi_global_variable_guid = EFI_GLOBAL_VARIABLE_GUID;
+const efi_guid_t __efi_runtime_data efi_global_variable_guid = EFI_GLOBAL_VARIABLE_GUID;
 const efi_guid_t efi_guid_device_path = EFI_DEVICE_PATH_PROTOCOL_GUID;
 const efi_guid_t efi_guid_loaded_image = EFI_LOADED_IMAGE_PROTOCOL_GUID;
 const efi_guid_t efi_guid_loaded_image_device_path =

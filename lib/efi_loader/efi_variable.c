@@ -219,7 +219,7 @@ efi_get_next_variable_name_int(efi_uintn_t *variable_name_size,
 	return efi_get_next_variable_name_mem(variable_name_size, variable_name, vendor);
 }
 
-efi_status_t efi_set_variable_int(const u16 *variable_name,
+efi_status_t __efi_runtime efi_set_variable_int(const u16 *variable_name,
 				  const efi_guid_t *vendor,
 				  u32 attributes, efi_uintn_t data_size,
 				  const void *data, bool ro_check)
@@ -440,7 +440,8 @@ efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *vendor,
 			 u32 attributes, efi_uintn_t data_size,
 			 const void *data)
 {
-	return EFI_UNSUPPORTED;
+	efi_set_variable_int(variable_name, vendor, attributes, data_size, data, false);
+	return EFI_SUCCESS;
 }
 
 /**
